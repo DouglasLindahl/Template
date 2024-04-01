@@ -16,9 +16,15 @@ export interface IProduct {
   price: number
 }
 
+const StyledHeader = styled.h1`
+  position: absolute;
+  color: white;
+  padding: 16px;
+`
+
 const CardDisplay = styled.section`
   width: 100vw;
-  height: 100vh;
+  min-height: 100vh;
   display: flex;
   flex-direction: row;
   justify-content: center;
@@ -26,6 +32,10 @@ const CardDisplay = styled.section`
   background-color: #202020;
   padding: 32px;
   gap: 32px;
+
+  @media (max-width: 640px) {
+    flex-direction: column;
+  }
 `
 
 export default function Home() {
@@ -43,9 +53,11 @@ export default function Home() {
   console.log(products)
   return (
     <main className={styles.main}>
+      <StyledHeader>Scott's Affiliate Products</StyledHeader>
       <CardDisplay>
         {products?.map((product, index) => (
           <Card
+            key={index} // Add key prop for each card
             image="https://m.media-amazon.com/images/I/61VMf4NG7lL._AC_SL1100_.jpg"
             link={`${product.link}`}
             name={product.displayName}
